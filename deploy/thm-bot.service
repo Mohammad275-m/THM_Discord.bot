@@ -1,0 +1,19 @@
+# Example only. Create user thmbot, install project into /opt/thm-discord-bot,
+# and give that user ownership of the project/data directory before enabling.
+[Unit]
+Description=TryHackMe Discord room completion bot
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=thmbot
+WorkingDirectory=/opt/thm-discord-bot
+ExecStart=/opt/thm-discord-bot/.venv/bin/python -m thm_bot
+Restart=on-failure
+RestartSec=30
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
